@@ -759,8 +759,12 @@ static NSDictionary *defaultFaceDetectorOptions = nil;
       if (videoCodec == nil) {
         videoCodec = [self.movieFileOutput.availableVideoCodecTypes firstObject];
       }
-
-      self.videoRecordedResolve(@{ @"uri": outputFileURL.absoluteString, @"codec":videoCodec });
+      NSMutableDictionary *response = [[NSMutableDictionary alloc] init];
+      response[@"width"] = @"1280";
+      response[@"height"] = @"720";
+      response[@"codec"] = videoCodec;
+      response[@"uri"] = outputFileURL.absoluteString;
+      self.videoRecordedResolve(response);
     } else if (self.videoRecordedReject != nil) {
         self.videoRecordedReject(@"E_RECORDING_FAILED", @"An error occurred while recording a video.", error);
     }
