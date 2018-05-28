@@ -101,6 +101,8 @@ public class RNCameraView extends CameraView implements LifecycleEventListener, 
           if (path != null) {
             WritableMap result = Arguments.createMap();
             result.putString("uri", RNFileUtils.uriFromFile(new File(path)).toString());
+            result.putString("width", cameraView.getWidth());
+            result.putString("height", cameraView.getHeight());
             mVideoRecordedPromise.resolve(result);
           } else {
             mVideoRecordedPromise.reject("E_RECORDING", "Couldn't stop recording - there is none in progress");
